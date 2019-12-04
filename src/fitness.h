@@ -1,9 +1,9 @@
-#ifndef SSO_fitness_H
-#define SSO_fitness_H
+#ifndef ICA_fitness_H
+#define ICA_fitness_H
 #include "ICA_ARG.h"
 #include "operator.h"
 
-int fitness(vec_1D &);
+int calFitness(veci_1D &);
 
 
 #endif

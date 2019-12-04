@@ -12,22 +12,28 @@ using namespace std;
 class Country
 {
 private:
-    veci_1D solution;
     
-    
+
 public: 
+    veci_1D solution;
+    int empireIndex;
+    int belong;
     float cost;
+    float power;
     void printSolution();
-    void assignColony(vector<Country>);
-    void moveColonyToImperialist();
-    void exchangePositions();
+    //void assignColony(vector<Country>);
+    //void exchangePositions();
+    //void assimilate();
+    //void competition();
+    void calPowerOfEmpire();
+
    
     Country(bool); //建構子
     Country();
 };
 
-inline vector<Country> empireList(empireNum, Country()); //Use vector to construct Spider
-inline vector<Country> colonyList(colonyNum, Country());     //Use vector to construct Spider
+inline vector<Country> empireList(empireNum, Country()); //Use vector to construct Country
+inline vector<Country> colonyList(colonyNum, Country());     //Use vector to construct Country
 inline veci_1D colonyBelong;
 //inline Spider bestSpider;
 
