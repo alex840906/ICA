@@ -11,7 +11,7 @@ void assignColony(vector<Country>& );
 void swapObject(Country&,Country&);
 void moveColonyToImperialist(Country,Country);
 void exchangePosition(Country&,Country&);
-void competition();
+void competition(vector<Country>&);
 
 //float calAvgWeight(vector<Spider>);
 

@@ -2,7 +2,7 @@
 
 int round_double(double number)
 {
-    return (number > 0.0) ? (number + 0.5) : (number - 0.5); 
+    return (number > 0.0) ? (number + 0.5) : (number - 0.5);
 }
 
 void assignColony(vector<Country> empireList)
@@ -10,7 +10,7 @@ void assignColony(vector<Country> empireList)
     vecf_1D normalizeCost(empireNum, 0);
     vecf_1D normalizePower(empireNum, 0);
 
-    for(int i=0;i<empireList.size();i++)
+    for (int i = 0; i < empireList.size(); i++)
         empireList[i].empireIndex = i;
 
     int maxCost = empireList[0].cost;
@@ -64,7 +64,7 @@ void assignColony(vector<Country> empireList)
     }
 }
 
-void swapObject(Country& A,Country& B)
+void swapObject(Country &A, Country &B)
 {
     Country tmp = A;
     A = B;
@@ -91,21 +91,47 @@ void moveColonyToImperialist(Country colony)
             }
         }
     }
-    
+
     for (int i = 0; i < cellsSize; i++)
     {
         colony.solution[cells[i]] = empireList[colony.belong].solution[cells[i]];
     }
-    colony.cost = calFitness(colony.solution);  
+    colony.cost = calFitness(colony.solution);
 }
 
-void exchangePosition(Country& colony)
+void exchangePosition(Country &colony)
 {
-    if(colony.cost < empireList[colony.belong].cost)
-        swapObject(colony,empireList[colony.belong]);
+    if (colony.cost < empireList[colony.belong].cost)
+        swapObject(colony, empireList[colony.belong]);
 }
 
-void competition(Country empireList)
+void competition(vector<Country> &empireList)
 {
-    
+    vecf_1D nTotalPower(empireNum);
+    float maxnPower;
+    maxnPower = empireList[0].power;
+
+    for (int i = 0; i < empireNum - 1; i++)
+    {
+        if (maxnPower < empireList[i + 1].power)
+            maxnPower = empireList[i + 1].power;
+    }
+
+    float totalPower = 0;
+    for (int i = 0; i < empireNum; i++)
+    {
+        nTotalPower[i] = empireList[i].power - maxnPower;
+        totalPower += nTotalPower[i];
+    }
+
+    vecf_1D pProbability(empireNum);
+    vecf_1D rVector(empireNum);
+    vecf_1D dVector(empireNum);
+
+    for (int i = 0; i < empireNum; i++)
+    {
+        pProbability[i] = abs(empireList[i].power / totalPower);
+        rVector[i] = (double)rand() / RAND_MAX;
+        dVector[i] = pProbability[i] - rVector[i];
+    }
 }
